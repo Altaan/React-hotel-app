@@ -1,5 +1,6 @@
 import React from "react";
 
+// this component is the image shown at the top of pages
 const Hero = ({ children, hero }) => {
   return <header className={hero}>{children}</header>;
 };
