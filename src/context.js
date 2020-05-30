@@ -38,9 +38,17 @@ class RoomProvider extends Component {
     return tempItems;
   }
 
+  // this function will be passed down to consumers with value prop in RoomContext.Provider
+  getRoom = (slug) => {
+    let tempRooms = [...this.state.rooms];
+    // getting the room obj that matches the slug in url
+    const room = tempRooms.find((room) => room.slug === slug);
+    return room;
+  };
+
   render() {
     return (
-      <RoomContext.Provider value={{ ...this.state }}>
+      <RoomContext.Provider value={{ ...this.state, getRoom: this.getRoom }}>
         {this.props.children}
       </RoomContext.Provider>
     );

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import defaultImg from "../images/room-1.jpeg";
 
-// This component is used to render each individual room in home and rooms pages
+// This component is used to render room preview in home and rooms pages
 const Room = ({ room }) => {
   const { name, images, price, slug } = room;
   return (
@@ -15,7 +15,11 @@ const Room = ({ room }) => {
         <div className="price-top">
           <h6>${price}</h6>
         </div>
-        <Link to={`/rooms/${slug}`} className="btn-primary room-link">
+        <Link
+          to={`/rooms/${slug}`}
+          onClick={() => window.scrollTo(0, 0)}
+          className="btn-primary room-link"
+        >
           Features
         </Link>
       </div>
