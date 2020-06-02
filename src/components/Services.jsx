@@ -4,7 +4,7 @@ import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 import Title from "./Title";
 
 // This component shows the services section on Home page
-export class Services extends Component {
+class Services extends Component {
   state = {
     services: [
       {

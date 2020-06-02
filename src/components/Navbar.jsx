@@ -3,7 +3,7 @@ import logo from "../images/logo.svg";
 import { FaAlignRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export class Navbar extends Component {
+class Navbar extends Component {
   // the state of the nav btn
   state = {
     isOpen: false,

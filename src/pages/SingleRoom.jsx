@@ -7,7 +7,7 @@ import Banner from "../components/Banner";
 import StyledHero from "../components/Hero.style";
 
 // This page is used to render a single room with all details about the room
-export class SingleRoom extends Component {
+class SingleRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
