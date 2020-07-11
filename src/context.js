@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
-import items from "./data";
+// import items from "./data";
+
+import Client from "./Contentful";
 
 const RoomContext = React.createContext();
 
@@ -24,22 +26,35 @@ class RoomProvider extends Component {
     pets: false,
   };
 
+  // This function gets the data from contenful
+  getData = async () => {
+    try {
+      let response = await Client.getEntries({
+        content_type: "beachHotelRooms",
+        order: "sys.createdAt",
+      });
+      // formatting the data to remove some of the nesting
+      let rooms = this.formatData(response.items);
+      let featuredRooms = rooms.filter((room) => room.featured === true);
+      // getting maxSize and maxPrice for rooms from data to setState according to the data
+      let maxPrice = Math.max(...rooms.map((item) => item.price));
+      let maxSize = Math.max(...rooms.map((item) => item.size));
+      this.setState({
+        rooms,
+        featuredRooms,
+        sortedRooms: rooms,
+        loading: false,
+        price: maxPrice,
+        maxPrice,
+        maxSize,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   componentDidMount() {
-    // formatting the data to remove some of the nesting
-    let rooms = this.formatData(items);
-    let featuredRooms = rooms.filter((room) => room.featured === true);
-    // getting maxSize and maxPrice for rooms from data to setState according to the data
-    let maxPrice = Math.max(...rooms.map((item) => item.price));
-    let maxSize = Math.max(...rooms.map((item) => item.size));
-    this.setState({
-      rooms,
-      featuredRooms,
-      sortedRooms: rooms,
-      loading: false,
-      price: maxPrice,
-      maxPrice,
-      maxSize,
-    });
+    this.getData();
   }
 
   formatData(items) {
